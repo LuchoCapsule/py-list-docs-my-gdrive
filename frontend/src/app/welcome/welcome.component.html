@@ -1,0 +1,100 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Image Manager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button [disabled]="isLoading" id="redirectButton" (click)="fnGetImageList()" class="btn btn-primary mx-2">
+            <i class="bi bi-cloud-download"></i> Get Google Drive Images
+          </button>
+        </li>
+        <li class="nav-item">
+          <button [disabled]="isLoading" id="btnLoadLocalImgs" (click)="fnLoadLocalImages()" class="btn btn-info mx-2">
+            <i class="bi bi-folder-symlink"></i> Load Local Images
+          </button>
+        </li>
+        <li class="nav-item" *ngIf="localImages.length > 0">
+          <button [disabled]="!fnHasSelectedImages()" id="btnRemoveLocalImgs" (click)="fnRemoveSelectedImages()" class="btn btn-danger mx-2">
+            <i class="bi bi-trash"></i> Remove Local Selected Images
+          </button>
+        </li>
+        <li class="nav-item" *ngIf="gdImages.length > 0">
+          <button [disabled]="!fnHasSelectedGdImages()" id="btnRemoveGdImgs" (click)="fnRemoveSelectedImagesFromBackend()" class="btn btn-danger mx-2">
+            <i class="bi bi-trash"></i> Remove Google Drive Selected Images
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Google Drive Images -->
+<div id="gdContainer" *ngIf="gdImages.length > 0" class="container mb-4">
+  <h3 class="mb-3">Google Drive Images</h3>
+  <div id="gdImages" class="container mt-3">
+    <div *ngFor="let group of fnGDUniqueGroups()" class="mb-4">
+      <h4>Group {{ group }}</h4>
+      <div class="row g-4">
+        <ng-container *ngFor="let img of gdImages">
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngIf="img.group === group">
+            <div class="card h-100">
+              <img [src]="img.binario" [alt]="img.alt" class="card-img-top">
+              <div class="card-body text-center">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [id]="'checkbox-' + img.id" [(ngModel)]="img.selected">
+                  <label class="form-check-label small text-break fs-6 text" [for]="'checkbox-' + img.id">{{ img.name }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Local Images -->
+<div id="localContainer" *ngIf="localImages.length > 0" class="container mb-4">
+  <h3 class="mb-3">Local Images</h3>
+  <div id="localImages" class="container mt-3">
+    <div *ngFor="let group of uniqueGroups()" class="mb-4">
+      <h4>Group {{ group }}</h4>
+      <div class="row g-4">
+        <ng-container *ngFor="let img of localImages">
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngIf="img.group === group">
+            <div class="card h-100">
+              <img [src]="'assets/testing-imgs/' + img.name" [alt]="img.alt" class="card-img-top">
+              <div class="card-body text-center">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [id]="'checkbox-' + img.id" [(ngModel)]="img.selected">
+                  <label class="form-check-label" [for]="'checkbox-' + img.id">{{ img.name }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal fade" tabindex="-1" [ngClass]="{'show': isLoading}" [ngStyle]="{'display': isLoading ? 'block' : 'none'}">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Loading</h5>
+      </div>
+      <div class="modal-body text-center">
+        <p>Please wait while we fetch the images...</p>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

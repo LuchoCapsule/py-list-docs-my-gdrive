@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+.card-img-top {
+  width: 100%;
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+}
+.img-fluid {
+  width: 100px; /* Set the desired width */
+  height: 150px; /* Set the desired height */
+  object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+}
+
+.custom-checkbox {
+  border: 2px solid #000; /* Set the border to solid and specify the color */
+  width: 20px; /* Optional: Set a fixed width */
+  height: 20px; /* Optional: Set a fixed height */
+}
+
+.modal-content {
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.modal-header {
+  background-color: #007bff; /* Primary color background */
+  color: white; /* White text */
+}
+
+.modal-body {
+  font-size: 1.1em; /* Slightly larger text */
+}
