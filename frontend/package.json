@@ -3,24 +3,30 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.0",
+    "@angular/cli": "^17.3.2",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
+    "@angular/compiler-cli": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@angular/forms": "^17.3.0",
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "bootstrap": "^5.3.3",
+    "express": "^4.21.1",
+    "path": "^0.12.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "typescript": "~5.4.2",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
@@ -35,5 +41,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.2"
+  },
+  "engines": {
+    "node": "20.12.0",
+    "npm": "10.5.0"
   }
 }
