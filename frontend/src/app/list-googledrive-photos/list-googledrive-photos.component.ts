@@ -50,7 +50,8 @@ export default class ListGoogledrivePhotosComponent {
 
   fnTest() {
     console.log('fnTest');    
-    window.location.href = 'http://localhost:5000/auth/google'; 
+    // window.location.href = 'http://localhost:5000/auth/google'; 
+    window.location.href = 'https://gdphotos-backend-420f00bc3da4.herokuapp.com/auth/google'; 
     // this.route.queryParams.subscribe(params => {
     //   console.log('returned params', params);
     //   const token = params['token'];
