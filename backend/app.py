@@ -59,8 +59,8 @@ client_secretos = {
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "redirect_uris": ["http://localhost:5000/callback"],
-        "javascript_origins": ["http://localhost:5000"]
+        "redirect_uris": [ REDIRECT_URI + "callback"],
+        "javascript_origins": [REDIRECT_URI]
     }
 }
 print(f"client_secrets lagl*: {client_secretos}")
@@ -68,7 +68,7 @@ print(f"client_secrets lagl*: {client_secretos}")
 flow = Flow.from_client_config(
     client_secretos,
     scopes=["https://www.googleapis.com/auth/userinfo.email", "openid", "https://www.googleapis.com/auth/drive.readonly", "https://www.googleapis.com/auth/drive"],
-    redirect_uri="http://localhost:5000/callback"
+    redirect_uri= REDIRECT_URI +"callback"
 )
 
 def login_required(function):
