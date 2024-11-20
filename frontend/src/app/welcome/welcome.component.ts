@@ -120,7 +120,8 @@ export default class WelcomeComponent {
     this.isLoading = true;
             
     // Make the POST request
-    this.http.post<any[]>('http://localhost:5000/fetch-images', payload).subscribe({
+    //this.http.post<any[]>('https://gdphotos-backend-420f00bc3da4.herokuapp.com/fetch-images', payload).subscribe({
+      this.http.post<any[]>('https://gdphotos-backend-420f00bc3da4.herokuapp.com/fetch-images', payload).subscribe({
     next: (images) => 
     {
         console.log('Returned images from my Google Drive', images);
@@ -184,7 +185,8 @@ export default class WelcomeComponent {
 
     this.isLoading = true;
 
-    this.http.request('delete', 'http://localhost:5000/delete-images', { body: payload }).subscribe({
+    //this.http.request('delete', 'http://localhost:5000/delete-images', { body: payload }).subscribe({
+      this.http.request('delete', 'https://gdphotos-backend-420f00bc3da4.herokuapp.com/delete-images', { body: payload }).subscribe({
       next: (response) => {
         console.log('Images removed successfully:', response);
         this.fnRemoveSelectedGdImages(); // Remove images from the UI
