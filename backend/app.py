@@ -24,14 +24,15 @@ import random
 # # Function to load system environment variables and assign them globally. 
 # MAKE SURE these variables are created in the system with the right values.
 def load_env_variables():
-    global FLASK_SECRET_KEY, SESSION_TYPE, CLIENT_ID, CLIENT_SECRET, PROJECT_ID, REDIRECT_URI, REDIRECT_FRONTEND_URI
+    global FLASK_SECRET_KEY, SESSION_TYPE, CLIENT_ID, CLIENT_SECRET, PROJECT_ID, REDIRECT_URI_CALLBACK, REDIRECT_FRONTEND_URI, JAVASCRIPT_ORIGINS
     FLASK_SECRET_KEY = os.environ.get('FLASK_SECRET_KEY')
     SESSION_TYPE = os.environ.get('SESSION_TYPE')
     CLIENT_ID = os.environ.get('CLIENT_ID')
     CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
     PROJECT_ID = os.environ.get('PROJECT_ID')
-    REDIRECT_URI = os.environ.get('REDIRECT_URI')
+    REDIRECT_URI_CALLBACK = os.environ.get('REDIRECT_URI_CALLBACK')
     REDIRECT_FRONTEND_URI = os.environ.get('REDIRECT_FRONTEND_URI')
+    JAVASCRIPT_ORIGINS = os.environ.get('JAVASCRIPT_ORIGINS')
     print(f"FLASK_SECRET_KEY lagl*: {FLASK_SECRET_KEY}")
 
 # Call the function to load the environment variables. Sometimes is necessary to reboot the machine to load the new environment variables here
@@ -59,8 +60,8 @@ client_secretos = {
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "redirect_uris": [ REDIRECT_URI + "callback"],
-        "javascript_origins": [REDIRECT_URI]
+        "redirect_uris": [ REDIRECT_URI_CALLBACK ],
+        "javascript_origins": [ JAVASCRIPT_ORIGINS ]
     }
 }
 print(f"client_secrets lagl*: {client_secretos}")
@@ -68,7 +69,7 @@ print(f"client_secrets lagl*: {client_secretos}")
 flow = Flow.from_client_config(
     client_secretos,
     scopes=["https://www.googleapis.com/auth/userinfo.email", "openid", "https://www.googleapis.com/auth/drive.readonly", "https://www.googleapis.com/auth/drive"],
-    redirect_uri= REDIRECT_URI +"callback"
+    redirect_uri= REDIRECT_URI_CALLBACK
 )
 
 def login_required(function):
